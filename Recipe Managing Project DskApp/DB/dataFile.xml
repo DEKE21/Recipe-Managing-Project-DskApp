@@ -7,4 +7,19 @@
     <ingredient name="Peanut Butter" amount="1" unit="Spread" />
     <ingredient name="Bread" amount="2" unit="Slices" />
   </recipe>
+  <recipe>
+    <name complexity="easy">Water</name>
+    <restrictions meat="False" seafood="False" />
+    <ingredient name="water" amount="1" unit="cup" />
+  </recipe>
+  <recipe>
+    <name complexity="easy">Water</name>
+    <restrictions meat="False" seafood="False" />
+    <ingredient name="water" amount="1" unit="cup" />
+  </recipe>
+  <recipe>
+    <name complexity="easy">Water</name>
+    <restrictions meat="False" seafood="False" />
+    <ingredient name="water" amount="1" unit="cup" />
+  </recipe>
 </recipes>
