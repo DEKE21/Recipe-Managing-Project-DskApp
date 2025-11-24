@@ -22,14 +22,20 @@ public class example
       string path = System.Environment.CurrentDirectory.Replace("bin\\Debug", "\\DB\\dataFile.xml");
         read.read(path);
         List<recipe.Recipe> recipes = read.getRecipe();
-        recipe.Name n = new  recipe.Name("Water", "easy");
-        recipe.Restrictions r = new Restrictions("False","False");
-        recipe.Ingredient i = new Ingredient("water","1","cup");
-        List< recipe.Ingredient> il = new List<recipe.Ingredient>();
-        il.Add(i);
-        recipe.Recipe rep = new recipe.Recipe(n,r,il);
+        recipe.Name n = new  recipe.Name("Peanut Butter and Jelly", "easy");
+        recipe.Restrictions r = new Restrictions("False","True","False", "False", "True", "False", "True", "False", "False");
+        recipe.Intolerances it = new Intolerances("False", "True", "False", "False", "False", "False", "False", "False", "True", "False", "True", "True");
+        recipe.Ingredient p = new Ingredient("Peanut Butter","1","spread");
+        recipe.Ingredient j = new Ingredient("Jelly", "1", "spread");
+        recipe.Ingredient b = new Ingredient("Bread", "2", "slices");
 
-        write.write(path, rep);
+        List< recipe.Ingredient> il = new List<recipe.Ingredient>();
+        il.Add(p);
+        il.Add(j);
+        il.Add(b);  
+        recipe.Recipe rep = new recipe.Recipe(n,r,it,il);
+        
+        write.write(path, read.getRecipe()[0]);
 
 
     }
