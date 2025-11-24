@@ -84,19 +84,23 @@ namespace Recipe_Managing_Project_DskApp.DB
             xmlDoc.Load(path);
             var doc = xmlDoc.DocumentElement;
             var root = doc.ChildNodes;
-
-            for (int i = 0; i < root.Count; i++)
+            List<XmlNode> rml = new List<XmlNode>();
+            for (int i =0 ; i < root.Count; i+=1)
             {
-                foreach (XmlNode node in root[i].ChildNodes[0])
-                {
+                XmlNode node = root[i] .ChildNodes[0];
 
-                    if (node.InnerText == recipeName.Replace(" ", "-") || node.InnerText == recipeName.Replace("-", " ")) 
-                    {
-                         doc.RemoveChild(node.ParentNode.ParentNode);
-                    } 
-                }
+                if (node.InnerText == recipeName.Replace(" ", "-") || node.InnerText == recipeName.Replace("-", " ")) 
+                {
+                    rml.Add(node.ParentNode);
+     
+                } 
             }
+            for (int i = 0; i < rml.Count; i += 1)
+            {
+                doc.RemoveChild(rml[i]);
+            }                
             xmlDoc.Save(path);
+
         }
        
     }
