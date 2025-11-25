@@ -13,14 +13,17 @@ namespace Recipe_Managing_Project_DskApp.DB
     {
         XmlDocument xmlDoc;
         public List<Recipe> recipe;
-
-        public fileRead(XmlDocument doc)
+        public string path; 
+        public fileRead(XmlDocument doc, string path)
         {
             xmlDoc = doc;
-           
+            this.path = path;
         }
-
-        public void read(string path)
+        public void changePath(string path)
+        {
+            this.path = path;
+        }
+        public void read()
         {
             xmlDoc.Load(path);
             var element = xmlDoc.DocumentElement;
@@ -29,6 +32,7 @@ namespace Recipe_Managing_Project_DskApp.DB
             List<Ingredient> ingredients = new List<Ingredient>();
             Name name = new Name();
             Restrictions restrictions = new Restrictions();
+            Intolerances intolerances = new Intolerances();
             for (int i = 0; i < root.Count; i++)
             {
                 foreach(XmlNode node in root[i].ChildNodes) {
@@ -39,7 +43,12 @@ namespace Recipe_Managing_Project_DskApp.DB
                     }
                     else if (node.Name == "restrictions")
                     {
-                        restrictions = new Restrictions(node.Attributes[0].InnerText, node.Attributes[1].InnerText);
+                        restrictions = new Restrictions(node.Attributes[0].InnerText, node.Attributes[1].InnerText, node.Attributes[2].InnerText, node.Attributes[3].InnerText, node.Attributes[4].InnerText, node.Attributes[5].InnerText, node.Attributes[6].InnerText, node.Attributes[7].InnerText, node.Attributes[8].InnerText);
+                    }
+                    else if (node.Name == "intolerances") 
+                    {
+                        intolerances = new Intolerances(node.Attributes[0].InnerText, node.Attributes[1].InnerText, node.Attributes[2].InnerText, node.Attributes[3].InnerText, node.Attributes[4].InnerText, node.Attributes[5].InnerText, node.Attributes[6].InnerText, node.Attributes[7].InnerText, node.Attributes[8].InnerText, node.Attributes[9].InnerText, node.Attributes[10].InnerText, node.Attributes[11].InnerText);
+
                     }
                     else if (node.Name == "ingredient")
                     {
@@ -49,7 +58,7 @@ namespace Recipe_Managing_Project_DskApp.DB
 
                 }
             
-                recipe.Add(new Recipe(name, restrictions, ingredients));
+                recipe.Add(new Recipe(name, restrictions,intolerances, ingredients));
                 name = new Name();
                 restrictions = new Restrictions();
                 ingredients = new List<Ingredient>();
@@ -57,9 +66,14 @@ namespace Recipe_Managing_Project_DskApp.DB
         }
             
         
-    
-        public List<Recipe> getRecipe()
+        
+        public List<Recipe> getRecipes()
         {
+            return recipe;
+        }
+        public List<Recipe> refresh()
+        {
+            read();
             return recipe;
         }
     }
