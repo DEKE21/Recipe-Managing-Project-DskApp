@@ -36,6 +36,13 @@ namespace Recipe_Managing_Project_DskApp
                 MessageBox.Show("Please enter at least one ingredient.");
                 return;
             }
+            recipeloader recipeForm = new recipeloader
+            {
+                Ingredients = selectedIngredients,
+                Instructions = restrictedItems,
+                Intolerances = selectedDiets
+            };
+            recipeForm.Show();
 
             string connectionString = @"Data Source =. \SQLEXPRESS;Initial Catalog=RecipeDB;Integrated Security=True;";
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -149,9 +156,10 @@ namespace Recipe_Managing_Project_DskApp
                             .Select(i => i.Value).ToList()
                     }).ToList();
                 return recipes;
+
             
             }
-
+                
 
         }
     
