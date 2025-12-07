@@ -8,6 +8,10 @@ namespace Recipe_Managing_Project_DskApp.DB
 {
     internal class recipe
     {
+        internal static readonly string Instructions;
+
+        public static IEnumerable<object> Ingredients { get; internal set; }
+
         public struct Name
         {
             public string name;
