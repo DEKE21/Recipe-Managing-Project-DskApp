@@ -10,7 +10,7 @@ using Recipe_Managing_Project_DskApp.DB;
 
 namespace Recipe_Managing_Project_DskApp.Data
 {
-    internal class RecipeDataLoader
+    public static class RecipeDataLoader
     {
     }
 }

@@ -33,7 +33,7 @@ namespace Recipe_Managing_Project_DskApp
         private void recipeloader_Load(object sender, EventArgs e)
         {
            string xmlpath = Path.Combine(Application.StartupPath, "DB", "dataFile.xml");
-            var allrecipes = RecipeDataloader.LoadRecipes(xmlpath);
+            var allrecipes = RecipeDataLoader.LoadRecipes(xmlpath);
 
             var filteredRecipes = allrecipes.Where(r =>
                 (selectedIngredients.All(i => r.Ingredients.Contains(i))) &&
@@ -83,6 +83,17 @@ namespace Recipe_Managing_Project_DskApp
         }
         private void btnViewDetails_Click(object sender, EventArgs e)
         {
+            if (dvgResults.CurrentRow != null)
+            {
+                var recipe = (Recipe)dvgResults.CurrentRow.DataBoundItem;
+
+                string message = $"Name: {recipe.Name}\n\n" + $"Ingerdients:\n{string.Join("\n", recipe.Ingredients)}\n\n" + $"Instructions:\n{{recipe.Instructions}}\n\n" + $"Intolerences:\n{string.Join(", ", recipe.Intolerances)}";
+                MessageBox.Show(message, "Recipe Details", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Please select a recipe first.", "No selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
 
         }
 
