@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
 using static Recipe_Managing_Project_DskApp.DB.recipe;
@@ -38,6 +39,17 @@ namespace Recipe_Managing_Project_DskApp.Data
             read.read();
             return read.getRecipes();
 
+        }
+        public List<ListViewItem> getListView()
+        {
+            List<Recipe> allRecipes = load();
+            List<ListViewItem> listView = new List<ListViewItem>();
+            foreach (recipe.Recipe item in allRecipes)
+            {
+                ListViewItem lvi = new ListViewItem(item.Name.name);
+                listView.Add(lvi);
+             }
+            return listView;
         }
         /*
         public static List<Recipe> LoadRecipes(string xmlPath)

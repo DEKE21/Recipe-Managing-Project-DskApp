@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label5 = new System.Windows.Forms.Label();
             this.clbRestricted = new System.Windows.Forms.CheckedListBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -40,16 +41,18 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btn_Search = new System.Windows.Forms.Button();
             this.btn_cancel = new System.Windows.Forms.Button();
-            this.dvgResults = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dvgResults)).BeginInit();
+            this.recipeListing = new System.Windows.Forms.ListView();
+            this.recipeloaderBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.recipeloaderBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(596, 54);
+            this.label5.Location = new System.Drawing.Point(447, 44);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(110, 16);
+            this.label5.Size = new System.Drawing.Size(87, 13);
             this.label5.TabIndex = 25;
             this.label5.Text = "Restricted Foods";
             // 
@@ -66,17 +69,19 @@
             "Peanuts",
             "Seafood",
             "Red meat"});
-            this.clbRestricted.Location = new System.Drawing.Point(569, 77);
+            this.clbRestricted.Location = new System.Drawing.Point(427, 63);
+            this.clbRestricted.Margin = new System.Windows.Forms.Padding(2);
             this.clbRestricted.Name = "clbRestricted";
-            this.clbRestricted.Size = new System.Drawing.Size(169, 208);
+            this.clbRestricted.Size = new System.Drawing.Size(128, 157);
             this.clbRestricted.TabIndex = 14;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(803, 54);
+            this.label4.Location = new System.Drawing.Point(602, 44);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(126, 16);
+            this.label4.Size = new System.Drawing.Size(101, 13);
             this.label4.TabIndex = 24;
             this.label4.Text = "Dietary Intolerences";
             // 
@@ -96,25 +101,27 @@
             "Shellfish",
             "Peanuts",
             "Tree nuts"});
-            this.cblIntolerances.Location = new System.Drawing.Point(771, 77);
+            this.cblIntolerances.Location = new System.Drawing.Point(578, 63);
+            this.cblIntolerances.Margin = new System.Windows.Forms.Padding(2);
             this.cblIntolerances.Name = "cblIntolerances";
-            this.cblIntolerances.Size = new System.Drawing.Size(175, 208);
+            this.cblIntolerances.Size = new System.Drawing.Size(132, 157);
             this.cblIntolerances.TabIndex = 23;
             // 
             // lstIngredients
             // 
             this.lstIngredients.FormattingEnabled = true;
-            this.lstIngredients.ItemHeight = 16;
-            this.lstIngredients.Location = new System.Drawing.Point(234, 124);
+            this.lstIngredients.Location = new System.Drawing.Point(176, 101);
+            this.lstIngredients.Margin = new System.Windows.Forms.Padding(2);
             this.lstIngredients.Name = "lstIngredients";
-            this.lstIngredients.Size = new System.Drawing.Size(134, 164);
+            this.lstIngredients.Size = new System.Drawing.Size(102, 134);
             this.lstIngredients.TabIndex = 22;
             // 
             // btn_Addingredient
             // 
-            this.btn_Addingredient.Location = new System.Drawing.Point(243, 71);
+            this.btn_Addingredient.Location = new System.Drawing.Point(182, 58);
+            this.btn_Addingredient.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Addingredient.Name = "btn_Addingredient";
-            this.btn_Addingredient.Size = new System.Drawing.Size(126, 25);
+            this.btn_Addingredient.Size = new System.Drawing.Size(94, 20);
             this.btn_Addingredient.TabIndex = 21;
             this.btn_Addingredient.Text = "&Add Ingredient";
             this.btn_Addingredient.UseVisualStyleBackColor = true;
@@ -122,44 +129,48 @@
             // 
             // txtIngredient
             // 
-            this.txtIngredient.Location = new System.Drawing.Point(243, 43);
+            this.txtIngredient.Location = new System.Drawing.Point(182, 35);
+            this.txtIngredient.Margin = new System.Windows.Forms.Padding(2);
             this.txtIngredient.Name = "txtIngredient";
-            this.txtIngredient.Size = new System.Drawing.Size(126, 22);
+            this.txtIngredient.Size = new System.Drawing.Size(96, 20);
             this.txtIngredient.TabIndex = 20;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(255, 10);
+            this.label3.Location = new System.Drawing.Point(191, 8);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(89, 16);
+            this.label3.Size = new System.Drawing.Size(73, 13);
             this.label3.TabIndex = 19;
             this.label3.Text = "Ingredient List";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 10);
+            this.label2.Location = new System.Drawing.Point(8, 8);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(156, 16);
+            this.label2.Size = new System.Drawing.Size(121, 13);
             this.label2.TabIndex = 18;
             this.label2.Text = "Recipes Displayed Here";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(755, 10);
+            this.label1.Location = new System.Drawing.Point(566, 8);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(191, 16);
+            this.label1.Size = new System.Drawing.Size(156, 13);
             this.label1.TabIndex = 17;
             this.label1.Text = "Substitution and Health Section";
             // 
             // btn_Search
             // 
-            this.btn_Search.Location = new System.Drawing.Point(857, 415);
-            this.btn_Search.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_Search.Location = new System.Drawing.Point(647, 339);
+            this.btn_Search.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Search.Name = "btn_Search";
-            this.btn_Search.Size = new System.Drawing.Size(74, 30);
+            this.btn_Search.Size = new System.Drawing.Size(56, 24);
             this.btn_Search.TabIndex = 16;
             this.btn_Search.Text = "&Search";
             this.btn_Search.UseVisualStyleBackColor = true;
@@ -167,31 +178,42 @@
             // 
             // btn_cancel
             // 
-            this.btn_cancel.Location = new System.Drawing.Point(736, 418);
-            this.btn_cancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_cancel.Location = new System.Drawing.Point(552, 340);
+            this.btn_cancel.Margin = new System.Windows.Forms.Padding(2);
             this.btn_cancel.Name = "btn_cancel";
-            this.btn_cancel.Size = new System.Drawing.Size(74, 27);
+            this.btn_cancel.Size = new System.Drawing.Size(56, 22);
             this.btn_cancel.TabIndex = 15;
             this.btn_cancel.Text = "&Cancel";
             this.btn_cancel.UseVisualStyleBackColor = true;
             this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
             // 
-            // dvgResults
+            // recipeListing
             // 
-            this.dvgResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dvgResults.Location = new System.Drawing.Point(18, 47);
-            this.dvgResults.Name = "dvgResults";
-            this.dvgResults.RowHeadersWidth = 51;
-            this.dvgResults.RowTemplate.Height = 24;
-            this.dvgResults.Size = new System.Drawing.Size(174, 318);
-            this.dvgResults.TabIndex = 26;
+            this.recipeListing.Alignment = System.Windows.Forms.ListViewAlignment.Left;
+            this.recipeListing.AutoArrange = false;
+            this.recipeListing.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.recipeListing.GridLines = true;
+            this.recipeListing.HideSelection = false;
+            this.recipeListing.LabelWrap = false;
+            this.recipeListing.Location = new System.Drawing.Point(8, 35);
+            this.recipeListing.MultiSelect = false;
+            this.recipeListing.Name = "recipeListing";
+            this.recipeListing.ShowGroups = false;
+            this.recipeListing.Size = new System.Drawing.Size(121, 313);
+            this.recipeListing.TabIndex = 27;
+            this.recipeListing.UseCompatibleStateImageBehavior = false;
+            this.recipeListing.View = System.Windows.Forms.View.List;
+            // 
+            // recipeloaderBindingSource
+            // 
+            this.recipeloaderBindingSource.DataSource = typeof(Recipe_Managing_Project_DskApp.recipeloader);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(964, 474);
-            this.Controls.Add(this.dvgResults);
+            this.ClientSize = new System.Drawing.Size(723, 385);
+            this.Controls.Add(this.recipeListing);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.clbRestricted);
             this.Controls.Add(this.label4);
@@ -204,11 +226,11 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_Search);
             this.Controls.Add(this.btn_cancel);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Calhoun CookBook";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dvgResults)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.recipeloaderBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -228,7 +250,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btn_Search;
         private System.Windows.Forms.Button btn_cancel;
-        private System.Windows.Forms.DataGridView dvgResults;
+        private System.Windows.Forms.BindingSource recipeloaderBindingSource;
+        private System.Windows.Forms.ListView recipeListing;
     }
 }
 

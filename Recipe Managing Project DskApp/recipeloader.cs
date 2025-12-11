@@ -38,13 +38,23 @@ namespace Recipe_Managing_Project_DskApp
         {
            string xmlpath = Path.Combine(Application.StartupPath, "DB", "dataFile.xml");
             var allrecipes = dataLoader.load();
+            List<recipe.Recipe> filteredRecipes = new List<recipe.Recipe>();
+            foreach (var item in allrecipes) {
+                foreach(var intol in item.Intolerances.toDict())
+                {
+                    if (SelectedIntolerances.Contains(intol.Key) && !intol.Value) {
+                        filteredRecipes.Add(item);
+                            }
+                }
+            }
             /*
-             * var filteredRecipes = allrecipes.Where(r =>
+              var filteredRecipes = allrecipes.Where(r =>
                 (selectedIngredients.All(i => r.Ingredients.Contains(i))) &&
                 !r.Ingredients.Any(i => SelectedIntolerances.Contains(i)) &&
                 (SelectedIntolerances.Count == 0 || !r.Intolerances.(i => SelectedIntolerances.Contains(i)))
-                ).ToList();
-            */
+                ).ToList();*/
+            
+           
             allrecipes.Sort();
             dvgResults.DataSource = allrecipes;
 

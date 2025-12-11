@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Recipe_Managing_Project_DskApp;
+using Recipe_Managing_Project_DskApp.Data;
+using Recipe_Managing_Project_DskApp.DB;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,27 +13,39 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using Recipe_Managing_Project_DskApp;
-using Recipe_Managing_Project_DskApp.DB;
-
 using static Recipe_Managing_Project_DskApp.DB.recipe;
 
 namespace Recipe_Managing_Project_DskApp
 {
     public partial class Form1 : Form
     {
+        RecipeDataLoader dataLoader = new RecipeDataLoader();
+        public void updateListing()
+        {
+            recipeListing.Items.Clear();
+            recipeListing.Items.AddRange(dataLoader.getListView().ToArray());
+
+        }
         public Form1()
         {
             InitializeComponent();
+            updateListing();
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            var allRecipes = dataLoader.load();
         }
 
         private void btn_Search_Click(object sender, EventArgs e)
         {
+       
+            recipeListing.Items.AddRange(dataLoader.getListView().ToArray());
+            updateListing();
+          
+
+            
             var selectedIngredients = lstIngredients.Items.Cast<string>().ToList();
             var restrictedItems = clbRestricted.CheckedItems.Cast<string>().ToList();
             var selectedDiets = cblIntolerances.CheckedItems.Cast<string>().ToList();
@@ -52,19 +67,21 @@ namespace Recipe_Managing_Project_DskApp
 
 
             string xmlPath = Path.Combine(Application.StartupPath, "DB", "dataFile.xml");
-            var recipes = RecipeLoader.LoadRecipes(xmlPath);
-            dvgResults.DataSource = recipes;
 
-            var allRecipes = RecipeLoader.LoadRecipes(xmlPath);
+            var allRecipes =  dataLoader.load();
+            dvgResults.DataSource = allRecipes;
 
             var restrictedIngredients = clbRestricted.CheckedItems.Cast<string>().ToList();
             var selectedIntolerances = cblIntolerances.CheckedItems.Cast<string>().ToList();
 
-            var filteredRecipes = allRecipes.Where(r =>
+            
+            
+            /*var filteredRecipes =  allRecipes.Where(r =>
                  selectedIngredients.All(i => r.Ingredients.Contains(i)) &&
                  !r.Ingredients.Any(i => restrictedIngredients.Contains(i)) &&
                  (selectedIntolerances.Count == 0 || !r.Intolerances.Any(i => selectedIntolerances.Contains(i)))
-                 ).ToList();
+                 ).ToList();*/
+
         }
     
 

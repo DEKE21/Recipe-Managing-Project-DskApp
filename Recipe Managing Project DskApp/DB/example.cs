@@ -35,7 +35,8 @@ public class example
         il.Add(p);
         il.Add(j);
         il.Add(b);  
-     //   recipe.Recipe rep = new recipe.Recipe(n,r,it,il);
+        recipe.Recipe rep = new recipe.Recipe(n,r,it,il," ");
+       // rep.Intolerances.toDict();
         
       //  write.write(rep);
      //   write.removeRecipe("Peanut-Butter-and-Jelly");
