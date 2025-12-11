@@ -11,7 +11,7 @@ namespace Recipe_Managing_Project_DskApp.DB
     {
         public static string Instructions;
 
-      //  public static IEnumerable<object> Ingredients { get; internal set; }
+        //  public static IEnumerable<object> Ingredients { get; internal set; }
 
         public struct Name
         {
@@ -72,52 +72,52 @@ namespace Recipe_Managing_Project_DskApp.DB
             };
             }
         }
-            public struct Intolerances
+        public struct Intolerances
+        {
+            public bool Lactose;
+            public bool Gluten;
+            public bool Caffeine;
+            public bool Casein;
+            public bool Fructose;
+            public bool MSG;
+            public bool Eggs;
+            public bool Soy;
+            public bool Nuts;
+            public bool Shellfish;
+            public bool Peanuts;
+            public bool TreeNuts;
+
+            public Intolerances(
+                string lactose,
+                string gluten,
+                string caffeine,
+                string casein,
+                string fructose,
+                string msg,
+                string eggs,
+                string soy,
+                string nuts,
+                string shellfish,
+                string peanuts,
+                string treeNuts)
             {
-                public bool Lactose;
-                public bool Gluten;
-                public bool Caffeine;
-                public bool Casein;
-                public bool Fructose;
-                public bool MSG;
-                public bool Eggs;
-                public bool Soy;
-                public bool Nuts;
-                public bool Shellfish;
-                public bool Peanuts;
-                public bool TreeNuts;
+                Lactose = Convert.ToBoolean(lactose);
+                Gluten = Convert.ToBoolean(gluten);
+                Caffeine = Convert.ToBoolean(caffeine);
+                Casein = Convert.ToBoolean(casein);
+                Fructose = Convert.ToBoolean(fructose);
+                MSG = Convert.ToBoolean(msg);
+                Eggs = Convert.ToBoolean(eggs);
+                Soy = Convert.ToBoolean(soy);
+                Nuts = Convert.ToBoolean(nuts);
+                Shellfish = Convert.ToBoolean(shellfish);
+                Peanuts = Convert.ToBoolean(peanuts);
+                TreeNuts = Convert.ToBoolean(treeNuts);
 
-                public Intolerances(
-                    string lactose,
-                    string gluten,
-                    string caffeine,
-                    string casein,
-                    string fructose,
-                    string msg,
-                    string eggs,
-                    string soy,
-                    string nuts,
-                    string shellfish,
-                    string peanuts,
-                    string treeNuts)
-                {
-                    Lactose = Convert.ToBoolean(lactose);
-                    Gluten = Convert.ToBoolean(gluten);
-                    Caffeine = Convert.ToBoolean(caffeine);
-                    Casein = Convert.ToBoolean(casein);
-                    Fructose = Convert.ToBoolean(fructose);
-                    MSG = Convert.ToBoolean(msg);
-                    Eggs = Convert.ToBoolean(eggs);
-                    Soy = Convert.ToBoolean(soy);
-                    Nuts = Convert.ToBoolean(nuts);
-                    Shellfish = Convert.ToBoolean(shellfish);
-                    Peanuts = Convert.ToBoolean(peanuts);
-                    TreeNuts = Convert.ToBoolean(treeNuts);
-
-                }
-                public Dictionary<string, bool> toDict()
-                {
-                    return new Dictionary<string, bool>{
+            }
+            public Dictionary<string, bool> toDict()
+            {
+                return new Dictionary<string, bool>{
             { nameof(Lactose), Lactose },
             { nameof(Gluten), Gluten },
             { nameof(Caffeine), Caffeine },
@@ -133,39 +133,47 @@ namespace Recipe_Managing_Project_DskApp.DB
              };
 
 
-                }
-
             }
-            public struct Ingredient
+
+        }
+        public struct Ingredient
+        {
+            public string name;
+            public int amount;
+            public string unit;
+            public Ingredient(string _Name, string _Amount, string _Unit)
             {
-                public string name;
-                public int amount;
-                public string unit;
-                public Ingredient(string _Name, string _Amount, string _Unit)
-                {
-                    name = _Name;
-                    amount = Convert.ToInt32(_Amount);
-                    unit = _Unit;
-                }
+                name = _Name;
+                amount = Convert.ToInt32(_Amount);
+                unit = _Unit;
             }
-            public struct Recipe
+        }
+        public struct Recipe
+        {
+            public Name Name;
+            public Restrictions Restrictions;
+            public Intolerances Intolerances;
+            public List<Ingredient> Ingredients;
+            public string Instructions;
+            public Recipe(Name _Name, Restrictions _Restrictions, Intolerances _Intolerances, List<Ingredient> _Ingredients, string _Instructions)
             {
-                public Name Name;
-                public Restrictions Restrictions;
-                public Intolerances Intolerances;
-                public List<Ingredient> Ingredients;
-                public string Instructions;
-                public Recipe(Name _Name, Restrictions _Restrictions, Intolerances _Intolerances, List<Ingredient> _Ingredients, string _Instructions)
+                Name = _Name;
+                Restrictions = _Restrictions;
+                Intolerances = _Intolerances;
+                Ingredients = _Ingredients;
+                Instructions = _Instructions;
+            }
+            public List<string> getNamedIngredients()
+            {
+                List<string> list = new List<string>();
+                foreach (Ingredient i in Ingredients)
                 {
-                    Name = _Name;
-                    Restrictions = _Restrictions;
-                    Intolerances = _Intolerances;
-                    Ingredients = _Ingredients;
-                    Instructions = _Instructions;
+                    list.Add(i.name);
                 }
-
+                return list;
 
             }
-        
+
+        }
     }
 }

@@ -41,41 +41,88 @@ namespace Recipe_Managing_Project_DskApp
         private void btn_Search_Click(object sender, EventArgs e)
         {
        
-            recipeListing.Items.AddRange(dataLoader.getListView().ToArray());
             updateListing();
           
 
             
             var selectedIngredients = lstIngredients.Items.Cast<string>().ToList();
-            var restrictedItems = clbRestricted.CheckedItems.Cast<string>().ToList();
-            var selectedDiets = cblIntolerances.CheckedItems.Cast<string>().ToList();
+            var selectedRestrictions = clbRestricted.CheckedItems.Cast<string>().ToList();
+            var selectedIntolerances = cblIntolerances.CheckedItems.Cast<string>().ToList();
 
-            if (selectedIngredients.Count == 0)
-            {
-                MessageBox.Show("Please enter at least one ingredient.");
-                return;
-            }
+            //  if (selectedIngredients.Count == 0)
+            //   {
+            //     MessageBox.Show("Please enter at least one ingredient.");
+            //      return;
+            //  }
             recipeloader recipeForm = new recipeloader
             {
                 selectedIngredients = selectedIngredients,
-                Instructions = restrictedItems,
-                SelectedIntolerances = selectedDiets,
-                RestrictedItems = restrictedItems
+                Instructions = selectedRestrictions,
+                SelectedIntolerances = selectedIntolerances,
+                RestrictedItems = selectedRestrictions
             };
-            recipeForm.Show();
+          //  recipeForm.Show();
 
 
 
-            string xmlPath = Path.Combine(Application.StartupPath, "DB", "dataFile.xml");
-
+ 
             var allRecipes =  dataLoader.load();
-            dvgResults.DataSource = allRecipes;
+            //dvgResults.DataSource = allRecipes;
 
             var restrictedIngredients = clbRestricted.CheckedItems.Cast<string>().ToList();
-            var selectedIntolerances = cblIntolerances.CheckedItems.Cast<string>().ToList();
+            //     var selectedIntolerances = cblIntolerances.CheckedItems.Cast<string>().ToList();
+            //    var selectedRestrictions = cblIntolerances.CheckedItems.Cast<string>().ToList();
 
-            
-            
+            List<Recipe> filteredRecipe = dataLoader.load();
+            List<Recipe> filteredIntolerances = new List<Recipe>();
+            List<Recipe> filteredRestrictions = new List<Recipe>();
+            List<Recipe> filteredIngredients = new List<Recipe>();
+
+            for(int m =0; m < allRecipes.Count; m++) 
+            {
+                Recipe recipe = allRecipes[m];
+             var intolerances = recipe.Intolerances.toDict();
+                if (selectedIntolerances.Any()) {
+                    for (int i = 0; i < selectedRestrictions.Count; i++)
+                    {
+                        if (intolerances.ContainsKey(selectedIntolerances[i])&& intolerances[selectedIntolerances[i]]) {
+                            filteredRecipe.Remove(recipe);
+                       //     return;
+                        }
+                       // else { filteredIntolerances.Add(recipe); }
+                    }
+                }
+
+                var restrictions = recipe.Restrictions.toDict();
+                if (restrictions.Any())
+                {
+                    for (int i = 0; i < selectedRestrictions.Count; i++)
+                    {
+                        if (restrictions.ContainsKey(selectedRestrictions[i]) && restrictions[selectedRestrictions[i]])
+                        {
+                            filteredRecipe.Remove(recipe);
+                     //       return;
+
+                        }
+                   //     else { filteredRestrictions.Add(recipe); }
+                    }
+                }
+               var ingredients = recipe.getNamedIngredients();
+                if (ingredients.Any())
+                {
+                    for (int i = 0; i < ingredients.Count; i++)
+                    {
+                        if (selectedIngredients.Contains(ingredients[i])) {
+                            filteredRecipe.Remove(recipe);
+                     //       return;
+                        
+                    }
+                    }
+                }
+                recipeListing.Items.Clear();
+                recipeListing.Items.AddRange(dataLoader.convertToListView(filteredRecipe).ToArray());
+            }
+
             /*var filteredRecipes =  allRecipes.Where(r =>
                  selectedIngredients.All(i => r.Ingredients.Contains(i)) &&
                  !r.Ingredients.Any(i => restrictedIngredients.Contains(i)) &&

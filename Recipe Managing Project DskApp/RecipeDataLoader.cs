@@ -25,7 +25,7 @@ namespace Recipe_Managing_Project_DskApp.Data
         XmlDocument xmlDoc = new XmlDocument();
         fileRead read;
         fileWrite write;
-        List<recipe.Recipe> recipeList;
+        List<Recipe> recipeList;
 
         public RecipeDataLoader()
         {
@@ -51,32 +51,16 @@ namespace Recipe_Managing_Project_DskApp.Data
              }
             return listView;
         }
-        /*
-        public static List<Recipe> LoadRecipes(string xmlPath)
+        public List<ListViewItem> convertToListView(List<Recipe> allRecipes)
         {
-            var recipes = new List<Recipe>();
-            var xdoc = XDocument.Load(xmlPath);
-            foreach (var xRecipe in xdoc.Descendants("Recipe"))
+            List<ListViewItem> listView = new List<ListViewItem>();
+            foreach (Recipe item in allRecipes)
             {
-
-                var name = (string)xRecipe.Element("Name");
-                var instructions = "No instructions provided";
-
-                var ingredients = xRecipe.Elements("ingredients")
-                    .Select(x => (string)x.Attribute("name"))
-                    .Where(x => !string.IsNullOrEmpty(x))
-                    .ToList();
-                var intolerances = xRecipe.Elements("intolerances")?
-                    .Attributes()
-                    .Where(x => x.Value.Equals("True", StringComparison.OrdinalIgnoreCase))
-                    .Select(x => x.Name.LocalName)
-                    .ToList() ?? new List<string>();
-                var recipe = new Recipe();
-
-               // recipe = new Recipe(, instructions, ingredients, intolerances);
-                recipes.Add(recipe);
+                ListViewItem lvi = new ListViewItem(item.Name.name);
+                listView.Add(lvi);
             }
-            return recipes;
-        }*/
+            return listView;
+        }
+
     }
 }

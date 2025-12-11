@@ -55,7 +55,6 @@ namespace Recipe_Managing_Project_DskApp
                 ).ToList();*/
             
            
-            allrecipes.Sort();
             dvgResults.DataSource = allrecipes;
 
             if (allrecipes.Any())
