@@ -41,7 +41,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.rtbIngredients = new System.Windows.Forms.RichTextBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -177,6 +177,7 @@
             // 
             // richTextBox1
             // 
+            this.richTextBox1.BackColor = System.Drawing.SystemColors.Control;
             this.richTextBox1.Location = new System.Drawing.Point(12, 307);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
@@ -185,14 +186,14 @@
             this.richTextBox1.Text = "EX: Water, 1, Cup; Flour, 0.5, Cup;\nSeparate Name, Amount, and Unit with a comma." +
     "\nSeparate items with a Semicolon.";
             // 
-            // button1
+            // btnAdd
             // 
-            this.button1.Location = new System.Drawing.Point(594, 303);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(89, 34);
-            this.button1.TabIndex = 15;
-            this.button1.Text = "Add";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnAdd.Location = new System.Drawing.Point(594, 303);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(89, 34);
+            this.btnAdd.TabIndex = 15;
+            this.btnAdd.Text = "Add";
+            this.btnAdd.UseVisualStyleBackColor = true;
             // 
             // btnCancel
             // 
@@ -209,7 +210,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(707, 404);
             this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.rtbIngredients);
             this.Controls.Add(this.label1);
@@ -245,7 +246,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RichTextBox rtbIngredients;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnCancel;
     }
 }
