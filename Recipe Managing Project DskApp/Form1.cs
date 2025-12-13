@@ -40,11 +40,11 @@ namespace Recipe_Managing_Project_DskApp
 
         private void btn_Search_Click(object sender, EventArgs e)
         {
-       
-            updateListing();
-          
 
-            
+            updateListing();
+
+
+
             var selectedIngredients = lstIngredients.Items.Cast<string>().ToList();
             var selectedRestrictions = clbRestricted.CheckedItems.Cast<string>().ToList();
             var selectedIntolerances = cblIntolerances.CheckedItems.Cast<string>().ToList();
@@ -61,74 +61,88 @@ namespace Recipe_Managing_Project_DskApp
                 SelectedIntolerances = selectedIntolerances,
                 RestrictedItems = selectedRestrictions
             };
-          //  recipeForm.Show();
 
 
 
- 
-            var allRecipes =  dataLoader.load();
-            //dvgResults.DataSource = allRecipes;
+            var allRecipes = dataLoader.load();
 
             var restrictedIngredients = clbRestricted.CheckedItems.Cast<string>().ToList();
-            //     var selectedIntolerances = cblIntolerances.CheckedItems.Cast<string>().ToList();
-            //    var selectedRestrictions = cblIntolerances.CheckedItems.Cast<string>().ToList();
+
 
             List<Recipe> filteredRecipe = dataLoader.load();
             List<Recipe> filteredIntolerances = new List<Recipe>();
             List<Recipe> filteredRestrictions = new List<Recipe>();
             List<Recipe> filteredIngredients = new List<Recipe>();
-
-            for(int m =0; m < allRecipes.Count; m++) 
+            int v = 0;
+            int t = 0;
+            int a = allRecipes.Count;
+            for (int m = allRecipes.Count - 1; m >= 0; m--)
             {
-                Recipe recipe = allRecipes[m];
-             var intolerances = recipe.Intolerances.toDict();
-                if (selectedIntolerances.Any()) {
-                    for (int i = 0; i < selectedRestrictions.Count; i++)
-                    {
-                        if (intolerances.ContainsKey(selectedIntolerances[i])&& intolerances[selectedIntolerances[i]]) {
-                            filteredRecipe.Remove(recipe);
-                       //     return;
-                        }
-                       // else { filteredIntolerances.Add(recipe); }
-                    }
-                }
-
-                var restrictions = recipe.Restrictions.toDict();
-                if (restrictions.Any())
+                if (m == allRecipes.Count - 1)
                 {
-                    for (int i = 0; i < selectedRestrictions.Count; i++)
+                    Recipe recipe = filteredRecipe[m];
+                    var intolerances = recipe.Intolerances.toDict();
+
+                    if (selectedIntolerances.Any())
                     {
-                        if (restrictions.ContainsKey(selectedRestrictions[i]) && restrictions[selectedRestrictions[i]])
+                        for (int i = intolerances.Count - 1; i >= 0; i--)
                         {
-                            filteredRecipe.Remove(recipe);
-                     //       return;
+                            if (intolerances[selectedIntolerances[i]] == true)
+                            {
+
+
+                                filteredRecipe.RemoveAll(filtered => filteredRecipe.Contains(recipe));
+
+                            }
 
                         }
-                   //     else { filteredRestrictions.Add(recipe); }
                     }
-                }
-               var ingredients = recipe.getNamedIngredients();
-                if (ingredients.Any())
-                {
-                    for (int i = 0; i < ingredients.Count; i++)
+                    if (selectedRestrictions.Any())
                     {
-                        if (selectedIngredients.Contains(ingredients[i])) {
-                            filteredRecipe.Remove(recipe);
-                     //       return;
-                        
+                        var restrictions = recipe.Restrictions.toDict();
+
+                        for (int i = selectedRestrictions.Count - 1; i >= 0; i--)
+                        {
+                            if (restrictions[selectedRestrictions[i]] == true)
+                            {
+
+
+                                filteredRecipe.RemoveAll(filtered => filteredRecipe.Contains(recipe));
+
+                            }
+
+                        }
                     }
+                    if (selectedIngredients.Any())
+                    {
+                        var ingredients = recipe.getNamedIngredients();
+
+                        for (int i = selectedIngredients.Count - 1; i >= 0; i--)
+                        {
+                            if (ingredients.Contains(selectedIngredients[i]))
+                            {
+
+
+                                filteredRecipe.RemoveAll(filtered => filteredRecipe.Contains(recipe));
+
+                            }
+
+                        }
                     }
+
                 }
+
                 recipeListing.Items.Clear();
+                t.ToString();
+                // v.ToString();
                 recipeListing.Items.AddRange(dataLoader.convertToListView(filteredRecipe).ToArray());
+                /*var filteredRecipes =  allRecipes.Where(r =>
+                     selectedIngredients.All(i => r.Ingredients.Contains(i)) &&
+                     !r.Ingredients.Any(i => restrictedIngredients.Contains(i)) &&
+                     (selectedIntolerances.Count == 0 || !r.Intolerances.Any(i => selectedIntolerances.Contains(i)))
+                     ).ToList();*/
+
             }
-
-            /*var filteredRecipes =  allRecipes.Where(r =>
-                 selectedIngredients.All(i => r.Ingredients.Contains(i)) &&
-                 !r.Ingredients.Any(i => restrictedIngredients.Contains(i)) &&
-                 (selectedIntolerances.Count == 0 || !r.Intolerances.Any(i => selectedIntolerances.Contains(i)))
-                 ).ToList();*/
-
         }
     
 
@@ -160,34 +174,45 @@ namespace Recipe_Managing_Project_DskApp
                 MessageBox.Show("Please enter an ingredient.");
             }
         }
-            
 
-                /*      public static class RecipeLoader
+        private void lstIngredients_SelectedIndexChanged(object sender, EventArgs e)
         {
-  public static List<Recipe> LoadRecipes(string path)
+            if (lstIngredients.SelectedIndex != -1)
             {
-                var doc = XDocument.Load(path);
-                var recipes = doc.Descendants("Recipe")
-                    .Select(r => new Recipe
-                    {
-                        Name = r.Element("Name")?.Value,
-                        Ingredients = r.Element("Ingredients")?
-                            .Elements("Ingredient")
-                            .Select(i => i.Value).ToList(),
-                            Instructions = r.Element("Instructions")?.Value,
-                            Intolerances = r.Element("Intolerances")?
-                            .Elements("Intolerance")
-                            .Select(i => i.Value).ToList()
-                    }).ToList();
-                return recipes;
-
-            
+                lstIngredients.Items.RemoveAt(lstIngredients.SelectedIndex);
+                lstIngredients.Update();
             }
-                
+        }
 
-        }*/
-    
-            
+
+
+
+        /*      public static class RecipeLoader
+{
+public static List<Recipe> LoadRecipes(string path)
+    {
+        var doc = XDocument.Load(path);
+        var recipes = doc.Descendants("Recipe")
+            .Select(r => new Recipe
+            {
+                Name = r.Element("Name")?.Value,
+                Ingredients = r.Element("Ingredients")?
+                    .Elements("Ingredient")
+                    .Select(i => i.Value).ToList(),
+                    Instructions = r.Element("Instructions")?.Value,
+                    Intolerances = r.Element("Intolerances")?
+                    .Elements("Intolerance")
+                    .Select(i => i.Value).ToList()
+            }).ToList();
+        return recipes;
+
+
+    }
+
+
+}*/
+
+
     }
 }
 

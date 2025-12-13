@@ -63,12 +63,12 @@ namespace Recipe_Managing_Project_DskApp.DB
             { nameof(Dairy), Dairy },
             { nameof(Gluten), Gluten },
             { nameof(Shellfish), Shellfish },
-            { nameof(TreeNuts), TreeNuts },
+            { "Tree Nuts", TreeNuts },
             { nameof(Soy), Soy },
             { nameof(Eggs), Eggs },
             { nameof(Peanuts), Peanuts },
             { nameof(Seafood), Seafood },
-            { nameof(RedMeat), RedMeat }
+            {  "Red Meat", RedMeat }
             };
             }
         }
