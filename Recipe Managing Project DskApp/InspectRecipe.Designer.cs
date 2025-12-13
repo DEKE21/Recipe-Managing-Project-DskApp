@@ -99,7 +99,7 @@
             // rdRecipeName
             // 
             this.rdRecipeName.AutoSize = true;
-            this.rdRecipeName.Location = new System.Drawing.Point(40, 26);
+            this.rdRecipeName.Location = new System.Drawing.Point(58, 26);
             this.rdRecipeName.Name = "rdRecipeName";
             this.rdRecipeName.Size = new System.Drawing.Size(63, 20);
             this.rdRecipeName.TabIndex = 6;
@@ -126,7 +126,7 @@
             // rdComplex
             // 
             this.rdComplex.AutoSize = true;
-            this.rdComplex.Location = new System.Drawing.Point(187, 26);
+            this.rdComplex.Location = new System.Drawing.Point(40, 46);
             this.rdComplex.Name = "rdComplex";
             this.rdComplex.Size = new System.Drawing.Size(93, 20);
             this.rdComplex.TabIndex = 9;
@@ -135,7 +135,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(277, 26);
+            this.label6.Location = new System.Drawing.Point(127, 46);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(73, 20);
             this.label6.TabIndex = 10;
@@ -144,7 +144,7 @@
             // recipeName
             // 
             this.recipeName.AutoSize = true;
-            this.recipeName.Location = new System.Drawing.Point(109, 26);
+            this.recipeName.Location = new System.Drawing.Point(127, 26);
             this.recipeName.Name = "recipeName";
             this.recipeName.Size = new System.Drawing.Size(73, 20);
             this.recipeName.TabIndex = 11;
@@ -168,7 +168,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "InspectRecipe";
-            this.Text = "InspectRecipe";
+            this.Text = "View Recipe";
             this.ResumeLayout(false);
             this.PerformLayout();
 
